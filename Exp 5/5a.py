@@ -17,36 +17,39 @@ class accholder():
 		self.balance = newbal
 	def getNoOfAccounts():
 		getNoOfAccounts = staticmethod(getNoOfAccounts)
-		return accholder.count		
+		return accholder.count	
+	def getAccNum(self):
+		return self.accnum	
 
 n = int(input("Enter number of employees: "))
 emp = []
 print("Enter details in the format 'accnum Name age balance'")
 for i in range(n):
-	t = input("Emp 1: ").split()
+	t = input("Emp %d: "%(i+1)).split()
 	e = accholder()
 	e.setdata(int(t[0]), t[1], int(t[2]), float(t[3]))
 	emp.append(e)
 print("")
 an = int(input("Enter accnum to change balance: "))
+exists = False
 for i in range(n):
-	if (emp[i].accnum == an):
+	if (emp[i].getAccNum() == an):
 		emp[i].update(float(input("New Balance: ")))
-	else:
-		print("accnum does not exist")
+		exists = True
+		break
+if exists:
+	print("Updated Successfully")
+else:
+	print("accnum does not exist")
 for e in emp:
 	e.getdata()
 print("No of account holders = %d"%(accholder.count))
 
 class der1(accholder):
-	def __init__(self):
-		super(der1, self).__init__()
 	def update(self, name):
 		self.name = name
 		
 class der2(accholder):
-	def __init__(self):
-		super(der1, self).__init__()
 	def update(self, name, bal):
 		self.name = name
 		self.balance = bal
